@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"os"
 
-	plugin "github.com/avran02/sky-cli/plugin_loader"
+	"github.com/avran02/sky-cli/generator_modules/commands"
+	"github.com/avran02/sky-cli/generator_modules/file"
+	pl "github.com/avran02/sky-cli/plugin_loader"
 	"github.com/spf13/cobra"
 )
 
@@ -23,23 +25,20 @@ It takes one optional argument: your email to put in in cobra-cli generated copy
 
 func initProject(cmd *cobra.Command, args []string) {
 	pluginName := mustParceArgs(args) + ".so"
-	conf := plugin.LoadConf(pluginName)
-	configure := make(map[string]bool, 0)
+	conf := pl.LoadConf(pluginName)
 
-	requiredOptions := conf.GetRequiredParams()
-	for _, option := range requiredOptions {
-		configure[option] = true
+	err := commands.ExecAll(conf.GetOsCommands())
+	if err != nil {
+		fmt.Println("can't execute commands:", err)
+		os.Exit(1)
 	}
 
-	allOptions := conf.GetAvailalableOptions()
-	for _, option := range allOptions {
-		configure[option] = askIfNeeded(option)
-	}
-
-	fs := conf.GetVirtualFs(configure)
-	fs.Gen(".", conf)
+	fs := conf.GetVirtualFs()
+	fs.Gen(".", file.AskIfNeeded, file.GetUserValues)
+	fmt.Println("Project successfully generated")
 }
 
+// get plugin name from command args or exit with error code 1
 func mustParceArgs(args []string) string {
 	numArgs := len(args)
 	var plugin string
@@ -54,22 +53,6 @@ func mustParceArgs(args []string) string {
 		os.Exit(1)
 	}
 	return plugin
-}
-
-func askIfNeeded(option string) bool {
-	fmt.Println("is", option, "needed? [Y/n]")
-	var answer string
-	fmt.Scanln(&answer)
-	switch answer {
-	case "y", "Y", "":
-		return true
-	case "n", "N":
-		return false
-	default:
-		fmt.Println("Wrong answer")
-		os.Exit(1)
-	}
-	return false
 }
 
 func init() {

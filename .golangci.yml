@@ -23,7 +23,7 @@ linters-settings:
   #     - condition
   #     - return
   lll:
-    line-length: 180
+    line-length: 140
 
 linters:
   # please, do not use `enable-all`: it's deprecated and will be removed soon.

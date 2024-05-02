@@ -3,7 +3,7 @@ module github.com/avran02/sky-cli
 go 1.21.6
 
 require (
-	github.com/avran02/sky-cli-lib v0.0.1
+	github.com/avran02/sky-cli-lib v0.1.0
 	github.com/spf13/cobra v1.8.0
 )
 

@@ -5,24 +5,24 @@ import (
 	"os"
 	"plugin"
 
-	pluginInterface "github.com/avran02/sky-cli-lib"
+	skyclilib "github.com/avran02/sky-cli-lib"
 )
 
 const (
 	pluginsRoot string = "/home/andrey/go/skybrary/sky-cli/dist/"
 )
 
-func LoadConf(pluginName string) pluginInterface.PluginConfiger {
+// Search for PluginConfig getter in plugin object, named "GetPluginConfig" and call it, returning PluginConfiger object
+func LoadConf(pluginName string) skyclilib.PluginConfiger {
 	p := mustLoadPlugn(pluginName)
-	fmt.Println(p)
-	symbol, err := p.Lookup("GetPluginConfig") // search for PluginConfig object
+	symbol, err := p.Lookup("GetPluginConfig") // search for PluginConfig getter
 	if err != nil {
 		fmt.Println("can't load symbol:", err)
 		fmt.Println("make sure your sky-cli plugin is valid. \nLooks like you have not have a PluginConfig object")
 		os.Exit(1)
 	}
 
-	getConf, ok := symbol.(func() pluginInterface.PluginConfiger)
+	getConf, ok := symbol.(func() skyclilib.PluginConfiger)
 	if !ok {
 		fmt.Println("make sure your sky-cli plugin is valid. \nLooks like your PluginConfig object doesn't implement PluginConfiger interface")
 		os.Exit(1)
@@ -30,6 +30,7 @@ func LoadConf(pluginName string) pluginInterface.PluginConfiger {
 	return getConf()
 }
 
+// Search for plugin in plugins folder + pluginName, try to load it. If error occurs, os.Exit(1)
 func mustLoadPlugn(pluginName string) *plugin.Plugin {
 	pluginsAvailable := MustGetPluginNames()
 	for _, p := range pluginsAvailable {
@@ -44,12 +45,13 @@ func mustLoadPlugn(pluginName string) *plugin.Plugin {
 	}
 	fmt.Println("Unknown plugin. Available plugins:")
 	for _, pluginName := range pluginsAvailable {
-		fmt.Println(pluginName)
+		fmt.Println(pluginName[:len(pluginName)-3])
 	}
 	os.Exit(1)
 	return nil
 }
 
+// Search for all plugins in plugins folder
 func MustGetPluginNames() []string {
 	dir, err := os.Open(pluginsRoot)
 	if err != nil {
@@ -59,6 +61,10 @@ func MustGetPluginNames() []string {
 	defer dir.Close()
 
 	files, err := dir.Readdir(-1)
+	if err != nil {
+		fmt.Println("can't read plugins folder:", err)
+		os.Exit(1)
+	}
 	fileNames := []string{}
 	for _, file := range files {
 		fileNames = append(fileNames, file.Name())

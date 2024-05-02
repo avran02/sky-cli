@@ -1,5 +1,5 @@
-github.com/avran02/sky-cli-lib v0.0.1 h1:FzuTAHjwHqDoxU9sEXjPzsMvDcExQLGHW7pe2DtJyUM=
-github.com/avran02/sky-cli-lib v0.0.1/go.mod h1:gOu+WoZoyRDEC2c25mkDrMZUSYnVwi2vV/TrIXFV7gc=
+github.com/avran02/sky-cli-lib v0.1.0 h1:l+5oucauI9CPMVb1rrO0AvfYA6G++PkXLWni1LUWlzU=
+github.com/avran02/sky-cli-lib v0.1.0/go.mod h1:gOu+WoZoyRDEC2c25mkDrMZUSYnVwi2vV/TrIXFV7gc=
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
