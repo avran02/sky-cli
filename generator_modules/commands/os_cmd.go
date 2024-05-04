@@ -14,7 +14,7 @@ func ExecAll(commands []skyclilib.OsCommand) error {
 		args := getArgs(cmd)
 		err := execCmd(cmd.Name, args) // TODO: add retry
 		if err != nil {
-			fmt.Println("can't execute command", cmd.Name, "with args", args)
+			fmt.Println("can't execute command", cmd.Name, args)
 			return fmt.Errorf("error: %w", err)
 		}
 		fmt.Println("command", cmd.Name, "with args", args, "executed")
@@ -39,7 +39,7 @@ func getArgs(cmd skyclilib.OsCommand) []string {
 func execCmd(cmd string, args []string) error {
 	err := exec.Command(cmd, args...).Run() // #nosec
 	if err != nil {
-		fmt.Println("can't execute command", cmd, "with args", args)
+		fmt.Println("can't execute command", cmd, args)
 		fmt.Println("try again please")
 		return err
 	}
