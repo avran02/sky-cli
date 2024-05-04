@@ -1,3 +1,5 @@
+github.com/avran02/plugin v1.0.1 h1:6/x7WFKPHZe266OGgJYvMDNPT9tf2aufBuTD7euTo1s=
+github.com/avran02/plugin v1.0.1/go.mod h1:/Gh+y0lwW9UMMpf+QBmW4lmgzbEmg10nJ0J/9fD4wHo=
 github.com/avran02/sky-cli-lib v0.1.0 h1:l+5oucauI9CPMVb1rrO0AvfYA6G++PkXLWni1LUWlzU=
 github.com/avran02/sky-cli-lib v0.1.0/go.mod h1:gOu+WoZoyRDEC2c25mkDrMZUSYnVwi2vV/TrIXFV7gc=
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/avran02/sky-cli/plugins"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +18,7 @@ var configureCmd = &cobra.Command{
 	Run:   configureSkyCli,
 }
 
-func configureSkyCli(_ *cobra.Command, _ []string) {
+func configureSkyCli(cmd *cobra.Command, _ []string) {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		fmt.Println(err)
@@ -26,6 +27,8 @@ func configureSkyCli(_ *cobra.Command, _ []string) {
 	mustCreateDir(home + "/.config")
 	mustCreateDir(home + "/.config/sky-cli")
 	mustCreateDir(home + "/.config/sky-cli/plugins")
+	plugins.Install("github.com/avran02/plugin@v1.0.1")
+	// plugins.Install("github.com/avran02/sky-cli-plugins@v0.0.1/go-grpc")
 }
 
 func mustCreateDir(path string) {

@@ -6,21 +6,15 @@ package cmd
 import (
 	"fmt"
 
-	plugin "github.com/avran02/sky-cli/plugin_loader"
+	plugin "github.com/avran02/sky-cli/plugins"
 	"github.com/spf13/cobra"
 )
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: getPluginsList,
+	Short: "Get list of available plugins",
+	Run:   getPluginsList,
 }
 
 func getPluginsList(cmd *cobra.Command, args []string) {

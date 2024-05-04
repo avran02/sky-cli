@@ -9,7 +9,7 @@ import (
 
 	"github.com/avran02/sky-cli/generator_modules/commands"
 	"github.com/avran02/sky-cli/generator_modules/file"
-	pl "github.com/avran02/sky-cli/plugin_loader"
+	pl "github.com/avran02/sky-cli/plugins"
 	"github.com/spf13/cobra"
 )
 
