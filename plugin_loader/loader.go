@@ -8,9 +8,14 @@ import (
 	skyclilib "github.com/avran02/sky-cli-lib"
 )
 
-const (
-	pluginsRoot string = "/home/andrey/go/skybrary/sky-cli/dist/"
-)
+func getPluginsRoot() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	return home + "/.config/sky-cli/plugins"
+}
 
 // Search for PluginConfig getter in plugin object, named "GetPluginConfig" and call it, returning PluginConfiger object
 func LoadConf(pluginName string) skyclilib.PluginConfiger {
@@ -35,7 +40,7 @@ func mustLoadPlugn(pluginName string) *plugin.Plugin {
 	pluginsAvailable := MustGetPluginNames()
 	for _, p := range pluginsAvailable {
 		if pluginName == p {
-			plug, err := plugin.Open(pluginsRoot + p) // TODO: parcer plugin name
+			plug, err := plugin.Open(getPluginsRoot() + p) // TODO: parcer plugin name
 			if err != nil {
 				fmt.Println("can't open plugin:", err)
 				os.Exit(1)
@@ -53,7 +58,7 @@ func mustLoadPlugn(pluginName string) *plugin.Plugin {
 
 // Search for all plugins in plugins folder
 func MustGetPluginNames() []string {
-	dir, err := os.Open(pluginsRoot)
+	dir, err := os.Open(getPluginsRoot())
 	if err != nil {
 		fmt.Println("can't open plugins folder:", err)
 		os.Exit(1)
