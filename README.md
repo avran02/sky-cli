@@ -67,4 +67,4 @@ The utility will ask for the project name for the `go mod init` command. If you 
 
 Then open this folder in your favorite code editor. You will see the PluginConfig structure and some of its methods. You will also find the GetPluginConfig function. ___DON'T CHANGE IT!___ I prefer to describe all project directories in this method, and to describe commands and files in a separate var block at the bottom. All we have to do is write templates for the files in the tpl package, and describe the structure in a JSON-like object.
 
-You can always check out an example [here](github.com/avran02/go-grpc).
+You can always check out an example [here](https://github.com/avran02/go-grpc).
