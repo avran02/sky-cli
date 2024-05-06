@@ -1,5 +1,7 @@
 # SKY_CLI tool for generating project templates
 
+Russian docs [here](https://github.com/avran02/sky-cli/blob/master/README.RU.md)
+
 1. [Introduction](#introduction)
 2. [Warnings](#warnings)
 3. [Installation](#installation)
