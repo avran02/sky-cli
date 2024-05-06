@@ -6,6 +6,7 @@ import (
 	"os/exec"
 
 	skyclilib "github.com/avran02/sky-cli-lib"
+	"github.com/avran02/sky-cli/generator_modules/file"
 )
 
 // execute all commands
@@ -18,22 +19,45 @@ func ExecAll(commands []skyclilib.OsCommand) error {
 			return fmt.Errorf("error: %w", err)
 		}
 		fmt.Println("command", cmd.Name, "with args", args, "executed")
+		fmt.Println("")
 	}
 	return nil
 }
 
-// get arguments from user
 func getArgs(cmd skyclilib.OsCommand) []string {
-	commandArgs := make([]string, 0)
+	commandArgs := make([]string, len(cmd.Args))
+	var i int
 	for _, arg := range cmd.Args {
-		if arg.NeedGetFromUser {
-			commandArgs = append(commandArgs, askValue(cmd.Name, arg.Name, commandArgs))
-		} else {
-			commandArgs = append(commandArgs, arg.Name)
+		i++
+		switch arg.Source.Get() {
+		case "FromUser":
+			commandArgs[i] = askValue(cmd.Name, arg.Name, commandArgs)
+		case "FromUserBool":
+			if file.AskIfNeeded(arg.Name) {
+				commandArgs[i] = arg.Name
+			}
+		case "FromPlugin":
+			commandArgs[i] = arg.Value
+		default:
+			fmt.Println("wrong type")
+			os.Exit(1)
 		}
 	}
 	return commandArgs
 }
+
+// get arguments from user
+// func getArgs(cmd skyclilib.OsCommand) []string {
+// 	commandArgs := make([]string, 0)
+// 	for _, arg := range cmd.Args {
+// 		if arg.NeedGetFromUser {
+// 			commandArgs = append(commandArgs, askValue(cmd.Name, arg.Name, commandArgs))
+// 		} else {
+// 			commandArgs = append(commandArgs, arg.Name)
+// 		}
+// 	}
+// 	return commandArgs
+// }
 
 // execute os command
 func execCmd(cmd string, args []string) error {
@@ -53,7 +77,7 @@ func askValue(executingCommand, argName string, previousArgs []string) string {
 		fullCmd += " " + arg
 	}
 	fullCmd += "': "
-	fmt.Println("Enter", argName, "for", fullCmd)
+	fmt.Print("Enter ", argName, " for ", fullCmd)
 	var answer string
 	_, err := fmt.Scanln(&answer)
 	if err != nil {

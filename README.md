@@ -1,5 +1,7 @@
 # SKY_CLI tool for generating project templates
 
+Russian docs [here](https://github.com/avran02/sky-cli/blob/master/README.RU.md)
+
 1. [Introduction](#introduction)
 2. [Warnings](#warnings)
 3. [Installation](#installation)
@@ -26,6 +28,12 @@ Install sky-cli
 ```
 go install github.com/avran02/sky-cli
 ```
+
+make shure that you have ~/go/bin in your PATH. If no, add to your .bashrc or .zshrc file
+```
+export PATH=$PATH:~/go/bin
+``` 
+
 To create a plugin directory in ~/.config/sky-cli and install the base plugins, run 
 ```
 sky-cli configure

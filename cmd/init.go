@@ -16,13 +16,13 @@ import (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initializes a new project config",
-	Long: `This command initializes a new project generation config file. This file will be deleted after project generation
-To execute this command, you must be in a project directory and you need to have cobra-cli installed to run following command
-It takes one optional argument: your email to put in in cobra-cli generated copyright. If not provided, "unknown" will be used`,
+	Long: `This command start interactive generation question and creates project template.
+You must specify plugin name as argument. It will be used to create your project.`,
 	Run:     initProject,
-	Example: "sky-cli init mail@example.com",
+	Example: "sky-cli init plugin",
 }
 
+// load plugin, execute all commands and generate project
 func initProject(cmd *cobra.Command, args []string) {
 	pluginName := mustParceArgs(args) + ".so"
 	conf := pl.LoadConf(pluginName)
