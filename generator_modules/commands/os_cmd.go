@@ -26,9 +26,7 @@ func ExecAll(commands []skyclilib.OsCommand) error {
 
 func getArgs(cmd skyclilib.OsCommand) []string {
 	commandArgs := make([]string, len(cmd.Args))
-	var i int
-	for _, arg := range cmd.Args {
-		i++
+	for i, arg := range cmd.Args {
 		switch arg.Source.Get() {
 		case "FromUser":
 			commandArgs[i] = askValue(cmd.Name, arg.Name, commandArgs)
