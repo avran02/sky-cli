@@ -28,7 +28,7 @@ func configureSkyCli(cmd *cobra.Command, args []string) {
 	mustCreateDir(home + "/.config")
 	mustCreateDir(home + "/.config/sky-cli")
 	mustCreateDir(home + "/.config/sky-cli/plugins")
-	plugins.Install("github.com/avran02/plugin@v1.0.1")
+	plugins.Install("github.com/avran02/plugin@v1.1.0")
 }
 
 // if dir exists - do nothing, if not - create or exit with error

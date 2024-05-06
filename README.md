@@ -28,6 +28,12 @@ Install sky-cli
 ```
 go install github.com/avran02/sky-cli
 ```
+
+make shure that you have ~/go/bin in your PATH. If no, add to your .bashrc or .zshrc file
+```
+export PATH=$PATH:~/go/bin
+``` 
+
 To create a plugin directory in ~/.config/sky-cli and install the base plugins, run 
 ```
 sky-cli configure
