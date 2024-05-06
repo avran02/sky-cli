@@ -8,7 +8,7 @@ import (
 
 // ask user if option is needed and return bool value
 func AskIfNeeded(option string) bool {
-	fmt.Println("is", option, "needed? [Y/n]")
+	fmt.Print("is ", option, " needed? [Y/n]: ")
 	var answer string
 	fmt.Scanln(&answer)
 	answer = strings.ToLower(answer)
@@ -32,9 +32,9 @@ func GetUserValues(filename string, userValues map[string]string) map[string]str
 	return userValues
 }
 
-// 16(15) глагол 18дезерир 19свеча 20вишня
+// ask user to enter value
 func askValue(filename, argName string) string {
-	fmt.Println("Enter value for", argName, "in file", filename, ":")
+	fmt.Print("Enter value for", argName, " in file ", filename, ":")
 	var answer string
 	_, err := fmt.Scanln(&answer)
 	if err != nil {

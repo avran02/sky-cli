@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 avran2002@gmail.com
 */
 package cmd
 
@@ -10,13 +10,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Get list of available plugins",
-	Run:   getPluginsList,
+	Long: `This command get list of available plugins. 
+It search in ~/.config/sky-cli/plugins directory and cut 3 last symbols from filename.`,
+	Run: getPluginsList,
 }
 
+// get list of available plugins from ~/.config/sky-cli/plugins
 func getPluginsList(cmd *cobra.Command, args []string) {
 	pluginsList := plugin.MustGetPluginNames()
 	fmt.Println("Available plugins:")

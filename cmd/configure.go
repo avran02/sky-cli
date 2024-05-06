@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 Avranenko Andrey avran2002@gmail.com
 */
 package cmd
 
@@ -18,7 +18,8 @@ var configureCmd = &cobra.Command{
 	Run:   configureSkyCli,
 }
 
-func configureSkyCli(cmd *cobra.Command, _ []string) {
+// Create ~/.config/sky-cli/plugins directory and download plugin generator
+func configureSkyCli(cmd *cobra.Command, args []string) {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		fmt.Println(err)
@@ -28,9 +29,9 @@ func configureSkyCli(cmd *cobra.Command, _ []string) {
 	mustCreateDir(home + "/.config/sky-cli")
 	mustCreateDir(home + "/.config/sky-cli/plugins")
 	plugins.Install("github.com/avran02/plugin@v1.0.1")
-	// plugins.Install("github.com/avran02/sky-cli-plugins@v0.0.1/go-grpc")
 }
 
+// if dir exists - do nothing, if not - create or exit with error
 func mustCreateDir(path string) {
 	_, err := os.Stat(path)
 	if err != nil {
@@ -45,14 +46,4 @@ func mustCreateDir(path string) {
 
 func init() {
 	rootCmd.AddCommand(configureCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// configureCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// configureCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

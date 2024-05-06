@@ -28,6 +28,7 @@ func Install(url string) {
 	}
 }
 
+// execute os command
 func execCmd(cmd string, args []string) error {
 	err := exec.Command(cmd, args...).Run() // #nosec
 	if err != nil {
@@ -38,6 +39,7 @@ func execCmd(cmd string, args []string) error {
 	return nil
 }
 
+// get GOPATH or HOME/go if GOPATH is empty
 func getGoPkgRoot() string {
 	gopath := os.Getenv("GOPATH")
 	if gopath == "" {

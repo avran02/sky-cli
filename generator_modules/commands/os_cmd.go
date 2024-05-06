@@ -18,6 +18,7 @@ func ExecAll(commands []skyclilib.OsCommand) error {
 			return fmt.Errorf("error: %w", err)
 		}
 		fmt.Println("command", cmd.Name, "with args", args, "executed")
+		fmt.Println("")
 	}
 	return nil
 }
@@ -53,7 +54,7 @@ func askValue(executingCommand, argName string, previousArgs []string) string {
 		fullCmd += " " + arg
 	}
 	fullCmd += "': "
-	fmt.Println("Enter", argName, "for", fullCmd)
+	fmt.Print("Enter ", argName, " for ", fullCmd)
 	var answer string
 	_, err := fmt.Scanln(&answer)
 	if err != nil {
